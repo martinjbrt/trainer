@@ -55,10 +55,19 @@ module Trainer
         end
 
         tp = Trainer::TestParser.new(path, config)
-        File.write(to_path, tp.to_junit)
-        puts "Successfully generated '#{to_path}'"
 
-        return_hash[to_path] = tp.tests_successful?
+        device_name = tp.data[0][:run_destination][:name]
+        os_version = tp.data[0][:run_destination][:target_device][:operating_system_version]
+        suffix = "#{device_name}_#{os_version}".gsub(" ", "_")
+
+        suffixed_to_path = to_path
+        file_extension = File.extname(suffixed_to_path)
+        suffixed_to_path = suffixed_to_path.reverse.sub(file_extension.reverse, ("_#{suffix}#{file_extension}").reverse).reverse
+
+        File.write(suffixed_to_path, tp.to_junit)
+        puts "Successfully generated '#{suffixed_to_path}'"
+
+        return_hash[suffixed_to_path] = tp.tests_successful?
       end
       return_hash
     end
