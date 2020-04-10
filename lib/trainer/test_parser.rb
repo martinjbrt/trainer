@@ -20,14 +20,14 @@ module Trainer
       files = Dir["#{containing_dir}/**/*_TestSummaries.plist"]
 
       # Xcode 10
-      files += Dir["#{containing_dir}/**/Logs/Test/*.xcresult/TestSummaries.plist"]
-      files += Dir["#{containing_dir}/Test/*.xcresult/TestSummaries.plist"]
-      files += Dir["#{containing_dir}/*.xcresult/TestSummaries.plist"]
-      files += Dir[containing_dir] if containing_dir.end_with?(".plist") # if it's the exact path to a plist file
-      # Xcode 11
-      files += Dir["#{containing_dir}/**/Logs/Test/*.xcresult"]
-      files += Dir["#{containing_dir}/Test/*.xcresult"]
-      files += Dir["#{containing_dir}/*.xcresult"]
+      # files += Dir["#{containing_dir}/**/Logs/Test/*.xcresult/TestSummaries.plist"]
+      # files += Dir["#{containing_dir}/Test/*.xcresult/TestSummaries.plist"]
+      # files += Dir["#{containing_dir}/*.xcresult/TestSummaries.plist"]
+      # files += Dir[containing_dir] if containing_dir.end_with?(".plist") # if it's the exact path to a plist file
+      # # Xcode 11
+      # files += Dir["#{containing_dir}/**/Logs/Test/*.xcresult"]
+      # files += Dir["#{containing_dir}/Test/*.xcresult"]
+      # files += Dir["#{containing_dir}/*.xcresult"]
       files << containing_dir if File.extname(containing_dir) == ".xcresult"
 
       if files.empty?
